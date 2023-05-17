@@ -1,0 +1,16 @@
+.input {
+    width:450px;
+    outline:none;
+    border:2px solid rgba(0,0,0,0.1);
+    padding: 15px;
+    border-radius: 18px;
+    -webkit-border-radius: 18px;
+    -moz-border-radius: 18px;
+    -ms-border-radius: 18px;
+    -o-border-radius: 18px;
+    font-size: 16px;
+
+    &:focus {
+        border:2px solid rgba(0,0,0,0.3);
+    }
+}
