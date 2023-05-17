@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+// @ts-ignore
 import debounce from 'lodash.debounce';
 
 import styles from './search.module.scss';
@@ -7,12 +8,12 @@ import { setSearchValue } from '../../reducers/search';
 import { useState } from 'react';
 import { useCallback } from 'react';
 
-const Search = () => {
+const Search: React.FC = () => {
   const [value, setValue] = useState('')
   const dispatch = useDispatch();
 
   const updateSearchValue = useCallback(
-   debounce((value) => {
+   debounce((value: string) => {
       dispatch(setSearchValue(value))
     }, 350) , []
     )

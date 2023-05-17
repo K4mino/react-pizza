@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import '../scss/app.scss';
 import { setActiveCategory } from "../reducers/category";
+import { RootState } from "../store";
 
-const Categories = () => {
-  const activeCategory = useSelector((state) => state.category.activeCategory);
+const Categories: React.FC = () => {
+  const activeCategory = useSelector<RootState>((state) => state.category.activeCategory);
   const dispatch = useDispatch();
   const categories =[
     'Все',
@@ -15,7 +16,7 @@ const Categories = () => {
     'Закрытые'
   ]
 
-  const handleSelect = (i) => {
+  const handleSelect = (i: number) => {
     dispatch(setActiveCategory(i));
   }
 
@@ -24,8 +25,8 @@ const Categories = () => {
       <ul>
         {
           categories.map((cat, i) => (
-            <li 
-            key={cat} 
+            <li
+            key={cat}
             className={activeCategory === i ? 'active' : ''}
             onClick={() => handleSelect(i)}>
               {cat}

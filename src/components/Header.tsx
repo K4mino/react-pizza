@@ -2,13 +2,20 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import '../scss/app.scss';
+import { RootState } from "../store";
 import Search from './Search';
 
-const Header = () => {
-  const navigate = useNavigate();
-  const {totalPrice, items} = useSelector((state) => state.cart);
 
-  const totalCount = items?.reduce((sum, item) => {
+type CartState = {
+  totalPrice: number;
+  items: object[]; 
+}
+
+const Header: React.FC = () => {
+  const navigate = useNavigate();
+  const {totalPrice, items} = useSelector<RootState, CartState>((state) => state.cart);
+
+  const totalCount = items?.reduce((sum: number, item: object): number => {
     return item.count + sum;
   }, 0)
 

@@ -18,6 +18,7 @@ export const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isMounted = useRef(false);
+  
   const activeSort = useSelector((state) => state.sort.activeSort);
   const activeCategory = useSelector((state) => state.category.activeCategory);
   const searchValue = useSelector((state) => state.search.searchValue);

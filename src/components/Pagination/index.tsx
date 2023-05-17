@@ -1,10 +1,10 @@
 import React from 'react';
-import styles from './Pagination.module.scss'
+import styles from './Pagination.module.scss';
 import ReactPaginate from 'react-paginate';
 import { setActivePage } from "../../reducers/page";
 import { useDispatch } from 'react-redux';
 
-const Pagination = () => {
+const Pagination: React.FC = () => {
   const dispatch = useDispatch()
   return (
     <ReactPaginate

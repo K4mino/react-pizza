@@ -4,15 +4,15 @@ import '../scss/app.scss';
 import { setActiveSort } from "../reducers/sort";
 import { useEffect } from "react";
 
-const Sort = () => {
+const Sort: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedSort, setSelectedSort] = useState(0);
   const dispatch = useDispatch();
   const sorts = ['популярности', 'цене', 'алфавиту'];
   const engSorts = ['rating', 'price', 'title'];
-  const sortRef = useRef();
+  const sortRef = useRef<HTMLDivElement>(null);
 
-  const handleSelect = (i) => {
+  const handleSelect = (i: number) => {
     setSelectedSort(i);
     dispatch(setActiveSort(engSorts[i]));
     setIsOpen(false);

@@ -3,13 +3,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import cart, { addItem } from "../../reducers/cart";
 import "../../scss/app.scss";
+import { RootState } from "../../store";
 
-const PizzaBlock = (props) => {
-  const { title, price, sizes, types, src, id } = props;
+type PizzaBlockProps = {
+  title: string,
+  price: number,
+  sizes: number[],
+  types: number[],
+  src: string,
+  id: string
+} 
+
+const PizzaBlock:React.FC<PizzaBlockProps> = ({ title, price, sizes, types, src, id }) => {
   const typeNames = ["Тонкая", "Традиционная"]; 
   const [activeType, setActiveType] = React.useState(0);
   const [activeSize, setActiveSize] = React.useState(0);
-  const cartItem = useSelector((state) => state.cart.items.find((item) => item.id === id))
+  const cartItem = useSelector<RootState>((state) => state.cart.items.find((item) => item.id === id))
   const dispatch = useDispatch();
 
   const count = cartItem ? cartItem.count : 0;
