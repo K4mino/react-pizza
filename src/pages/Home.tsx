@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import qs from "qs";
+import qs, { ParsedQs } from "qs";
 import "../scss/app.scss";
 import Categories from "../components/Categories";
 import PizzaBlock from "../components/PizzaBlock/index";
@@ -13,27 +13,31 @@ import { setActiveSort } from "../reducers/sort";
 import { setActivePage } from "../reducers/page";
 import { useRef } from "react";
 import { getItems } from "../reducers/pizza";
+import { RootState, useAppDispatch } from "../store";
+
+type Pizza = {
+  title: string
+}
 
 export const Home = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const isMounted = useRef(false);
   
-  const activeSort = useSelector((state) => state.sort.activeSort);
-  const activeCategory = useSelector((state) => state.category.activeCategory);
-  const searchValue = useSelector((state) => state.search.searchValue);
-  const activePage = useSelector((state) => state.page.activePage);
-  const status = useSelector((state) => state.pizza.status);
-  const pizzaList = useSelector((state) => state.pizza.items);
+  const activeSort = useSelector((state: RootState) => state.sort.activeSort);
+  const activeCategory = useSelector((state: RootState) => state.category.activeCategory);
+  const searchValue = useSelector((state: RootState) => state.search.searchValue);
+  const activePage = useSelector((state: RootState) => state.page.activePage);
+  const status = useSelector((state: RootState) => state.pizza.status);
+  const pizzaList = useSelector((state: RootState) => state.pizza.items);
 
   useEffect(() => {
     if (window.location.search) {
-      const params = qs.parse(window.location.search.substring(1));
+      const params: ParsedQs = qs.parse(window.location.search.substring(1));
 
       dispatch(setActiveCategory(Number(params.category)));
-      dispatch(setActiveSort(params.sortBy));
+      dispatch(setActiveSort(String(params.sortBy)));
       dispatch(setActivePage(Number(params.page)));
-
     }
   }, []);
 
@@ -45,7 +49,7 @@ export const Home = () => {
       fetchPizzas();
   }, [activeSort, activeCategory, searchValue, activePage]);
 
-  const pizzas = pizzaList.filter((pizza) => {
+  const pizzas = pizzaList.filter((pizza: Pizza) => {
     if (pizza.title.toLowerCase().includes(searchValue)) {
       return true;
     }

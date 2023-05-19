@@ -4,6 +4,7 @@ import '../scss/app.scss';
 import { setActiveSort } from "../reducers/sort";
 import { useEffect } from "react";
 
+
 const Sort: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedSort, setSelectedSort] = useState(0);
@@ -19,9 +20,12 @@ const Sort: React.FC = () => {
   }
 
   useEffect(() => {
-    const handleClickOutside = (e) => {
-      const path = e.composedPath()
-      if(!path.includes(sortRef.current)){
+    const handleClickOutside = (e: MouseEvent): void => {
+      const _e = e as MouseEvent & {
+        composedPath: () => EventTarget[];
+      }
+      const path = _e.composedPath()
+      if(sortRef.current && !path.includes(sortRef.current)){
         setIsOpen(false)
       }
     }
@@ -57,7 +61,7 @@ const Sort: React.FC = () => {
           <ul>
             {
               sorts.map((item,i) => (
-                <li className={selectedSort === i} key={item} onClick={() => handleSelect(i)}>{item}</li>
+                <li className={selectedSort === i ? 'active' : '  '} key={item} onClick={() => handleSelect(i)}>{item}</li>
               ))
             }
           </ul>

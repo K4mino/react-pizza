@@ -1,6 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-const initialState = {
+type SorthSliceState = {
+    activeSort: string
+}
+
+const initialState: SorthSliceState = {
   activeSort: 'rating',
 }
 
@@ -8,7 +12,7 @@ export const sortSlice = createSlice({
     name:'sort',
     initialState,
     reducers:{
-        setActiveSort: (state,action) => {
+        setActiveSort: (state,action: PayloadAction<string>) => {
             state.activeSort = action.payload
         }
     }

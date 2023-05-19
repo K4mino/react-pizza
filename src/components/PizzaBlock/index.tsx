@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import cart, { addItem } from "../../reducers/cart";
+import { addItem, CartItem } from "../../reducers/cart";
 import "../../scss/app.scss";
 import { RootState } from "../../store";
 
@@ -18,19 +18,20 @@ const PizzaBlock:React.FC<PizzaBlockProps> = ({ title, price, sizes, types, src,
   const typeNames = ["Тонкая", "Традиционная"]; 
   const [activeType, setActiveType] = React.useState(0);
   const [activeSize, setActiveSize] = React.useState(0);
-  const cartItem = useSelector<RootState>((state) => state.cart.items.find((item) => item.id === id))
+  const cartItem = useSelector((state: RootState) => state.cart.items.find((item) => item.id === id))
   const dispatch = useDispatch();
 
   const count = cartItem ? cartItem.count : 0;
 
   const handleAddToCart = () => {
-    const item ={
+    const item: CartItem ={
       id,
       title,
       price,
       src,
       type:typeNames[activeType],
       size: sizes[activeSize],
+      count: 0
     }
     dispatch(addItem(item))
   }

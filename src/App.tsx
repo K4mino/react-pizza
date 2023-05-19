@@ -8,9 +8,10 @@ import Cart from "./pages/Cart";
 import { useSelector } from "react-redux";
 import EmptyCart from "./pages/EmptyCart";
 import PizzaPage from "./pages/PizzaPage";
+import { RootState } from "./store";
 
 function App() {
-  const items = useSelector((state: object) => state.cart.items)
+  const items = useSelector((state: RootState) => state.cart.items)
   return (
     <div className="wrapper">
       <Header />

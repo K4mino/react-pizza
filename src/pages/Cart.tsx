@@ -5,13 +5,15 @@ import { clearCart } from "../reducers/cart";
 import "../scss/app.scss";
 import { RootState } from "../store";
 
-
+interface Item {
+  count: number
+}
 
 const Cart: React.FC = () => {
   const dispatch = useDispatch();
-  const {totalPrice, items} = useSelector<RootState>((state) => state.cart);
+  const {totalPrice, items} = useSelector((state: RootState) => state.cart);
 
-  const totalCount = items?.reduce((sum: number, item: object) => {
+  const totalCount = items.reduce((sum: number, item: Item) => {
     return item.count + sum;
   }, 0)
 

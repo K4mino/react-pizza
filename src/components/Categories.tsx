@@ -5,7 +5,7 @@ import { setActiveCategory } from "../reducers/category";
 import { RootState } from "../store";
 
 const Categories: React.FC = () => {
-  const activeCategory = useSelector<RootState>((state) => state.category.activeCategory);
+  const activeCategory = useSelector((state: RootState) => state.category.activeCategory);
   const dispatch = useDispatch();
   const categories =[
     'Все',

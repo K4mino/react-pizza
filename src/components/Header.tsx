@@ -11,11 +11,15 @@ type CartState = {
   items: object[]; 
 }
 
+interface CartItem  {
+  count: number
+}
+
 const Header: React.FC = () => {
   const navigate = useNavigate();
-  const {totalPrice, items} = useSelector<RootState, CartState>((state) => state.cart);
+  const {totalPrice, items} = useSelector((state: RootState) => state.cart);
 
-  const totalCount = items?.reduce((sum: number, item: object): number => {
+  const totalCount = items.reduce((sum: number, item: CartItem) => {
     return item.count + sum;
   }, 0)
 
