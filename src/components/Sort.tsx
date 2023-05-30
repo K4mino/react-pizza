@@ -1,14 +1,13 @@
 import React, { useRef, useState } from "react";
-import { useDispatch } from "react-redux";
 import '../scss/app.scss';
 import { setActiveSort } from "../reducers/sort";
 import { useEffect } from "react";
-
+import { useAppDispatch } from "../store";
 
 const Sort: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedSort, setSelectedSort] = useState(0);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const sorts = ['популярности', 'цене', 'алфавиту'];
   const engSorts = ['rating', 'price', 'title'];
   const sortRef = useRef<HTMLDivElement>(null);

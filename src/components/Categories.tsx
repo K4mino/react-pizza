@@ -1,12 +1,13 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useCallback } from "react";
+import { useSelector } from "react-redux";
 import '../scss/app.scss';
 import { setActiveCategory } from "../reducers/category";
 import { RootState } from "../store";
+import { useAppDispatch } from "../store";
 
-const Categories: React.FC = () => {
+const Categories: React.FC = React.memo(() => {
   const activeCategory = useSelector((state: RootState) => state.category.activeCategory);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const categories =[
     'Все',
     'Мясные',
@@ -16,10 +17,10 @@ const Categories: React.FC = () => {
     'Закрытые'
   ]
 
-  const handleSelect = (i: number) => {
+  const handleSelect = useCallback((i: number) => {
     dispatch(setActiveCategory(i));
-  }
-
+  },[]);
+  console.log("rerender")
   return (
     <div className="categories">
       <ul>
@@ -36,6 +37,6 @@ const Categories: React.FC = () => {
       </ul>
     </div>
   );
-};
+});
 
 export default Categories;

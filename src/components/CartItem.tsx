@@ -1,6 +1,6 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { addItem,CartItem,minusItem, removeItem } from "../reducers/cart";
+import { useAppDispatch } from "../store";
 
 type CartItemProps = {
   id: string,
@@ -13,7 +13,7 @@ type CartItemProps = {
 }
 
 const CartItemBlock: React.FC<CartItemProps> = ({ id, title, type, price, count, src, size }) => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const handlePlus = () => {
         dispatch(addItem({id} as CartItem))

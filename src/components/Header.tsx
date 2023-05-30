@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import '../scss/app.scss';
@@ -18,10 +18,21 @@ interface CartItem  {
 const Header: React.FC = () => {
   const navigate = useNavigate();
   const {totalPrice, items} = useSelector((state: RootState) => state.cart);
+  const isFirstMount = useRef(false);
 
   const totalCount = items.reduce((sum: number, item: CartItem) => {
     return item.count + sum;
   }, 0)
+
+  useEffect(() => {
+    if(isFirstMount.current){
+      const jsonItems = JSON.stringify(items);
+      const jsonPrice = JSON.stringify(totalPrice);
+      localStorage.setItem('cartItems',jsonItems);
+      localStorage.setItem('totalPrice',jsonPrice);
+    }
+    isFirstMount.current = true;
+  },[items,totalPrice])
 
   return (
     <div className="header">

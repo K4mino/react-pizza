@@ -1,16 +1,17 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import CartItem from "../components/CartItem";
 import { clearCart } from "../reducers/cart";
 import "../scss/app.scss";
 import { RootState } from "../store";
+import { useAppDispatch } from "../store";
 
 interface Item {
   count: number
 }
 
 const Cart: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const {totalPrice, items} = useSelector((state: RootState) => state.cart);
 
   const totalCount = items.reduce((sum: number, item: Item) => {
